@@ -12,7 +12,9 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        return view('aprobaciones.empleados.index');
+        $empleados = Empleado::all();
+
+        return view('aprobaciones.empleados.index' ,compact('empleados'));
     }
 
     /**
@@ -28,7 +30,28 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'cedula' => 'required|unique:empleados',
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'cargo' => 'required',
+          ]);
+          $empleado = new Empleado();
+          $empleado->cedula = $request->cedula;
+          $empleado->nombre = $request->nombre;
+          $empleado->apellidos = $request->apellidos;
+          $empleado->cargo = $request->cargo;
+          $empleado->estado = 'Rechazado';
+
+  
+          $empleado->save();
+
+  
+          //Auth()->login($usuario);
+         // Auth::loginUsingId($usuario->id);
+  
+          return redirect()->route('aprobaciones.empleados.index');
+          //->with('info', 'La empresa se ha creado con exito');
     }
 
     /**

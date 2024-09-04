@@ -36,14 +36,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {{-- @forEach($empleados as $empleado)
+                            @forEach($empleados as $empleado)
                             <tr>
                                 <th style="text-align: center" scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $empleado->cedula }}</td>
                                 <td>{{ $empleado->nombre }}</td>
                                 <td>{{ $empleado->apellidos }}</td>
                                 <td>{{ $empleado->cargo }}</td>
-                                <td>{{ $empleado->estado }}</td>
+                                    @if( $empleado->estado === 'Pendiente')
+                                    <td class="alert alert-secondary p-0 text-center">{{ $empleado->estado }}</td>
+                                    @elseif($empleado->estado === 'Aprobado')
+                                    <td class="alert alert-success p-0 text-center">{{ $empleado->estado }}</td>
+                                    @elseif($empleado->estado === 'Rechazado')
+                                    <td class="alert alert-danger p-0 text-center">{{ $empleado->estado }}</td>
+                                    @endif
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
@@ -53,7 +59,7 @@
                                 </td>
 
                             </tr>
-                            @endforeach --}}
+                            @endforeach 
                         </tbody>
                     </table>
                     

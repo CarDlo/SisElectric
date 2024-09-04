@@ -9,7 +9,7 @@
         </div>
         <div class="modal-body">
           
-          <form action="" method="post">
+          <form action="{{route('aprobaciones.empleados.store')}}" method="post">
             @csrf
             <div class="row">
                 <div class="col-md-12">
@@ -24,8 +24,8 @@
                         @error('nombre')
                         <small style="">{{ $message }}</small>
                         @enderror
-                        <label for="apellido">Apellido</label>
-                        <input value="{{old('apellido')}}"  name="apellido" type="text" class="form-control" id="apellido" required>
+                        <label for="apellidos">Apellidos</label>
+                        <input value="{{old('apellidos')}}"  name="apellidos" type="text" class="form-control" id="apellidos" required>
                         @error('apellido')
                         <small style="">{{ $message }}</small>
                         @enderror
