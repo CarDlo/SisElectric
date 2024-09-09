@@ -4,10 +4,11 @@
 @section('content_header')
     <h1>Empleados para aprobacion</h1>
 @stop
-
+@section('plugins.Datatables', true)
+@section('plugins.DatatablesPlugins', true)
 @section('content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card card-outline card-primary">
                 <div class="card-header">
                 <h3 class="card-title">Empleados</h3>
@@ -21,10 +22,10 @@
                 </div>
                 
                 <div class="card-body">
-                    <table class="table table-bordered table-striped table-hover table-sm">
+                    <table class="table table-bordered table-striped table-hover table-sm" id="empleados">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">No</th>
                             <th scope="col">Cedula</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellidos</th>
@@ -44,11 +45,11 @@
                                 <td>{{ $empleado->apellidos }}</td>
                                 <td>{{ $empleado->cargo }}</td>
                                     @if( $empleado->estado === 'Pendiente')
-                                    <td class="alert alert-secondary p-0 text-center">{{ $empleado->estado }}</td>
+                                    <td class="bg-secondary">{{ $empleado->estado }}</td>
                                     @elseif($empleado->estado === 'Aprobado')
-                                    <td class="alert alert-success p-0 text-center">{{ $empleado->estado }}</td>
+                                    <td class="bg-success">{{ $empleado->estado }}</td>
                                     @elseif($empleado->estado === 'Rechazado')
-                                    <td class="alert alert-danger p-0 text-center">{{ $empleado->estado }}</td>
+                                    <td class="bg-danger">{{ $empleado->estado }}</td>
                                     @endif
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -71,7 +72,7 @@
             </div>
             
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             
 
             <div class="card card-outline card-primary">

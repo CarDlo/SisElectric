@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('apellidos');
             $table->string('cargo');
             $table->string('estado');
+            $table->string('condicion');
+            $table->datetime('fechaRetiro')->nullable();
             $table->timestamps();
         });
     }
