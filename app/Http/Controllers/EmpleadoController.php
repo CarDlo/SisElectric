@@ -42,6 +42,8 @@ class EmpleadoController extends Controller
           $empleado->apellidos = $request->apellidos;
           $empleado->cargo = $request->cargo;
           $empleado->estado = 'Pendiente';
+          $empleado->condicion = 'Activo';
+          
 
   
           $empleado->save();

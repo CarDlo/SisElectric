@@ -1,4 +1,4 @@
-<div class="modal fade" id="crearModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="crearModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -42,10 +42,9 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         
-                        <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                          <button type="submit" class="btn btn-primary">Registrar</button>
-                        </div>
+                          <button type="submit" class="btn btn-primary">Crear</button>
+
                     </div>{{-- cierre formgroup --}}
                 </div>{{-- cierre col-12 --}}
             </div>{{-- cierre row --}}

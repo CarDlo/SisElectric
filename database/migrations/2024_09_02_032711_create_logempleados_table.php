@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('logempleados', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo');
+            $table->string('titulo');
             $table->string('detalle');
-            $table->string('file_path')->nullable();
+            $table->string('estado');
+            $table->string('condicion');
             $table->unsignedBigInteger('empleado_id');
             $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
             $table->timestamps();

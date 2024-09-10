@@ -50,9 +50,13 @@ $(document).ready(function() {
             "processing": "Procesando...",
             "search": "Buscar:",
             "buttons":{
+            'copyTitle': 'Datos copiados',
+            'copySuccess': {
+                _: '%d filas copiadas',
+                1: '1 fila copiada'},
             "copy": "Copiar",
             "print": "imprimir",
-            "colvis": "Visualizar",
+            "colvis": "Columnas",
             },
             "zeroRecords": "Sin resultados encontrados",
             "paginate": {
@@ -60,7 +64,8 @@ $(document).ready(function() {
                 "last": "Ultimo",
                 "next": "Siguiente",
                 "previous": "Anterior"
-            }
+            },
+            
         }
     });
 });
