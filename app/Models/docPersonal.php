@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class docPersonal extends Model
 {
     use HasFactory;
+    
 }

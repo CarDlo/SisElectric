@@ -2,11 +2,16 @@
 
 
 @section('content_header')
+
+
     <h1>Empleados para aprobacion</h1>
 @stop
+
 @section('plugins.Datatables', true)
 @section('plugins.DatatablesPlugins', true)
 @section('content')
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <div class="row">
         <div class="col-md-8">
             <div class="card card-outline card-primary">
