@@ -28,7 +28,24 @@ class LogempleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate([
+        //     'cedula' => 'required|unique:empleados',
+        //     'nombre' => 'required',
+        //     'apellidos' => 'required',
+        //     'cargo' => 'required',
+        //   ]);
+          $Logempleado = new Logempleado();
+          $Logempleado->titulo = 'Titulo';
+          $Logempleado->detalle = $request->detalle;
+          $Logempleado->estado = 'Rechazado';
+          $Logempleado->condicion = 'Activo';
+          $Logempleado->empleado_id = 1;
+
+          
+
+  
+          $Logempleado->save();
+          return redirect()->route('aprobaciones.empleados.index');
     }
 
     /**

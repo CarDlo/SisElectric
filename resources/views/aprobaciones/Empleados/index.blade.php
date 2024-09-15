@@ -61,7 +61,7 @@
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
-                                        <button type="button" data-toggle="modal" data-target="#registrarModal" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></button>
+                                        <button type="button" data-toggle="modal" data-target="#registrarModal-{{ $empleado->id }}" data-nombre="{{ $empleado->nombre }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></button>
                                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </td>
@@ -72,8 +72,22 @@
                         
                     </table>
                     
-                    
-                    <x-modal-registrar/>
+                    @forEach($empleados as $empleado)
+                    <x-modal-registrar>
+                    <x-slot name="empleado_id">
+                        {{ $empleado->id }}
+                    </x-slot>
+                    <x-slot name="empleado_nombre">
+                        {{ $empleado->nombre }}
+                    </x-slot>
+                    <x-slot name="empleado_apellidos">
+                        {{ $empleado->apellidos }}
+                    </x-slot>
+                    <x-slot name="empleado_cedula">
+                        {{ $empleado->cedula }}
+                    </x-slot>
+                    </x-modal-registrar>
+                    @endforeach
                 </div>
 
             
@@ -195,7 +209,7 @@
             responsive: true,
         colReorder: true,
         keys: true,
-        lengthMenu: [5, 10, 25, 50, 75, 100, 500, 1000],
+        lengthMenu: [10, 25, 50, 75, 100, 500, 1000],
         layout: {
             topStart: {
                 buttons: [
@@ -230,7 +244,8 @@
 
         ]
             },
-            bottom2Start: 'pageLength',
+            bottomStart: 'pageLength',
+            bottom2Start: 'info',
             bottom2End: {
             searchBuilder: {
                 // config options here

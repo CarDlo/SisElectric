@@ -330,6 +330,19 @@ return [
             ],
         ],
         
+        [
+            'text' => 'Configuracion',
+            'icon' => 'fa-solid fa-user-gear',
+            'submenu' => [
+                [
+                    'text' => 'Usuarios',
+                    'icon' => 'fa-solid fa-person',
+                    'url' => 'admin/usuarios',
+                ],
+
+            ],
+        ],
+        
     ],
 
     /*
