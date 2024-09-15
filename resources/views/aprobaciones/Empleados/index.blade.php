@@ -2,13 +2,15 @@
 
 
 @section('content_header')
-
+<link href="../DataTables/datatables.min.css" rel="stylesheet">
+ 
+<script src="../DataTables/datatables.min.js"></script>
 
     <h1>Empleados para aprobacion</h1>
 @stop
 
-@section('plugins.Datatables', true)
-@section('plugins.DatatablesPlugins', true)
+{{-- @section('plugins.Datatables', true)
+@section('plugins.DatatablesPlugins', true) --}}
 @section('content')
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
@@ -28,7 +30,7 @@
                 
                 <div class="card-body">
                     <table class="table table-bordered table-striped table-hover table-sm" id="empleados">
-                        <thead class="thead-dark">
+                        <thead class="thead-light">
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Cedula</th>
@@ -187,6 +189,58 @@
 @stop
 
 @section('js')
+<script>
+    $(document).ready(function() {
+        new DataTable('#empleados', {
+            responsive: true,
+        colReorder: true,
+        keys: true,
+        lengthMenu: [5, 10, 25, 50, 75, 100, 500, 1000],
+        layout: {
+            topStart: {
+                buttons: [
+            'colvis',
+            {
+                extend: 'excel',
+                title: 'Empleados para aprobación',  // Título dentro del Excel
+                filename: 'EmpleadosAprobacion',  // Nombre del archivo Excel
+                },
+            'copy',
+            {
+                extend: 'pdf',
+                title: 'Empleados para aprobación',  // Título dentro del PDF
+                filename: 'EmpleadosAprobacion',  // Nombre del archivo PDF
+                orientation: 'portrait',  // Orientación del PDF (puede ser 'landscape' o 'portrait')
+                pageSize: 'A4',  // Tamaño de página
+                exportOptions: {
+                    columns: ':visible'  // Exportar solo columnas visibles
+                },
+                customize: function (doc) {
+                    // Personalización del PDF (añadir estilos, colores, etc.)
+                    doc.styles.title = {
+                        fontSize: 18,  // Tamaño de fuente del título
+                        bold: true,  // Título en negrita
+                        alignment: 'center'  // Alineación del título
+                    };
+                    doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+                }
 
+                
+            },
+
+        ]
+            },
+            bottom2Start: 'pageLength',
+            bottom2End: {
+            searchBuilder: {
+                // config options here
+            }
+        }
+        },
+        language: {
+        url: '../DataTables/es-MX.json',
+    },
+    }); 
+    });</script>
 
 @stop
