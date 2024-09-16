@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('logempleados', function (Blueprint $table) {
+        Schema::create('empresas', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('detalle');
-            $table->string('estado');
-            $table->string('condicion');
-            $table->unsignedBigInteger('empleado_id');
-            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
+            $table->string('nombre');
+            $table->string('tramo') ->nullable();
+            $table->string('tipo') ->nullable();
+            $table->string('nit') ->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('logempleados');
+        Schema::dropIfExists('empresas');
     }
 };

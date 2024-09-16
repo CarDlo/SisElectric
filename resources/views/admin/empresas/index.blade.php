@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-    <h1>Listado de usuarios</h1>
+    <h1>Listado de Empresas</h1>
     <link href="../DataTables/datatables.min.css" rel="stylesheet">
  
     <script src="../DataTables/datatables.min.js"></script>
@@ -13,12 +13,11 @@
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                <h3 class="card-title">Usuarios registrados</h3>
+                <h3 class="card-title">Empresas registrados</h3>
                     <div class="card-tools">
-                    <a class="btn btn-primary btn-sm" href="{{ route('admin.usuarios.create') }}">Crear nuevo</a>
-
+                        <a class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#crearModal">Crear nuevo</a>
                     </div>
-                
+                    <x-modal-crearEmpresa/>
                 </div>
                 
                 <div class="card-body">
@@ -26,29 +25,29 @@
                         <thead class="thead-light">
                         <tr>
                             <th class="text-center" scope="col">Nro</th>
-                            <th class="text-center" scope="col">Cedula</th>
                             <th class="text-center" scope="col">Nombre</th>
-                            <th class="text-center" scope="col">Email</th>
-                            <th class="text-center" scope="col">Empresa</th>
-                            <th class="text-center" scope="col">Creado</th>
+                            <th class="text-center" scope="col">Tramo</th>
+                            <th class="text-center" scope="col">Tipo</th>
+                            <th class="text-center" scope="col">NIT</th>
+                            <th class="text-center" scope="col">Creada</th>
                             <th class="text-center" scope="col">Acciones</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                            @forEach($usuarios as $usuario)
+                            @forEach($empresas as $empresa)
                             <tr>
                                 <th style="text-align: center" scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $usuario->cedula }}</td>
-                                <td>{{ $usuario->name }}</td>
-                                <td>{{ $usuario->email }}</td>
-                                <td>{{ $usuario->empresa_id }}</td>
-                                <td>{{ $usuario->created_at }}</td>
+                                <td>{{ $empresa->nombre }}</td>
+                                <td>{{ $empresa->tramo }}</td>
+                                <td>{{ $empresa->tipo }}</td>
+                                <td>{{ $empresa->nit }}</td>
+                                <td>{{ $empresa->created_at }}</td>
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ url('/admin/usuarios', $usuario->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ url('/admin/usuarios/'.$usuario->id.'/edit') }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
-                                        <form action="{{ url('/admin/usuarios/'.$usuario->id) }}" method="post" onclick="preguntar{{ $usuario->id }}(event)" id="miFormulario{{ $usuario->id }}">
+                                        <a href="{{ url('/admin/empresas', $empresa->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ url('/admin/empresas/'.$empresa->id.'/edit') }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ url('/admin/empresas/'.$empresa->id) }}" method="post" onclick="preguntar{{ $empresa->id }}(event)" id="miFormulario{{ $empresa->id }}">
                                             @csrf
                                             @method('DELETE')
                                             <button style="border-radius: 0px 3px 3px 0px" type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
@@ -116,14 +115,14 @@
             'colvis',
             {
                 extend: 'excel',
-                title: 'Empleados para aprobación',  // Título dentro del Excel
-                filename: 'EmpleadosAprobacion',  // Nombre del archivo Excel
+                title: 'Empresas',  // Título dentro del Excel
+                filename: 'Empresas',  // Nombre del archivo Excel
                 },
             'copy',
             {
                 extend: 'pdf',
-                title: 'Empleados para aprobación',  // Título dentro del PDF
-                filename: 'EmpleadosAprobacion',  // Nombre del archivo PDF
+                title: 'Empresas',  // Título dentro del PDF
+                filename: 'Empresas',  // Nombre del archivo PDF
                 orientation: 'portrait',  // Orientación del PDF (puede ser 'landscape' o 'portrait')
                 pageSize: 'A4',  // Tamaño de página
                 exportOptions: {

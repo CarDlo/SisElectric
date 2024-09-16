@@ -30,7 +30,7 @@
                 
                 <div class="card-body">
                     <table class="table table-bordered table-striped table-hover table-sm" id="empleados">
-                        <thead class="thead-light">
+                        <thead class="head-dark">
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Cedula</th>
@@ -241,6 +241,7 @@
 
                 
             },
+            
 
         ]
             },

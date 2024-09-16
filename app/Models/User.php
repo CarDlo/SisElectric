@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function logempleados()
+    {
+        return $this->hasMany(Logempleado::class);
+    }
+    public function empleados()
+    {
+        return $this->hasMany(Empleado::class);
+    }
 }

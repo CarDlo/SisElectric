@@ -19,7 +19,14 @@ return new class extends Migration
             $table->string('cargo');
             $table->string('estado');
             $table->string('condicion');
+            $table->unsignedBigInteger('empresa_id');
+            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade');
+            $table->unsignedBigInteger('subcontratista_id');
+            $table->foreign('subcontratista_id')->references('id')->on('subcontratistas')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->datetime('fechaRetiro')->nullable();
+            $table->datetime('fechaAprobacion')->nullable();
             $table->timestamps();
         });
     }

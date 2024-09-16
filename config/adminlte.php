@@ -339,6 +339,11 @@ return [
                     'icon' => 'fa-solid fa-person',
                     'url' => 'admin/usuarios',
                 ],
+                [
+                    'text' => 'Empresas',
+                    'icon' => 'fa-solid fa-building',
+                    'url' => 'admin/empresas',
+                ],
 
             ],
         ],

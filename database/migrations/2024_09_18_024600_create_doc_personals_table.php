@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('ruta_archivo'); // Ruta donde se almacena el archivo
             $table->string('tipo_archivo', 100); // Tipo MIME del archivo
             $table->bigInteger('tamaño_archivo'); // Tamaño del archivo en bytes
-            $table->unsignedBigInteger('usuario_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('log_id');
             $table->foreign('log_id')->references('id')->on('logempleados')->onDelete('cascade');
             $table->timestamps();

@@ -13,4 +13,12 @@ class Empleado extends Model
     {
         return $this->hasMany(Logempleado::class);
     }
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
+    public function subcontratista()
+    {
+        return $this->belongsTo(Subcontratista::class);
+    }
 }
