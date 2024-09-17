@@ -344,6 +344,11 @@ return [
                     'icon' => 'fa-solid fa-building',
                     'url' => 'admin/empresas',
                 ],
+                [
+                    'text' => 'Roles',
+                    'icon' => 'fa-solid fa-address-book',
+                    'url' => 'admin/roles',
+                ],
 
             ],
         ],

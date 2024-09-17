@@ -37,3 +37,12 @@ Route::get('/admin/empresas/{id}', [App\Http\Controllers\EmpresaController::clas
 Route::get('/admin/empresas/{id}/edit', [App\Http\Controllers\EmpresaController::class, 'edit'])->name('admin.empresas.edit')->middleware('auth');
 Route::put('/admin/empresas/{id}', [App\Http\Controllers\EmpresaController::class, 'update'])->name('admin.empresas.update')->middleware('auth');
 Route::delete('/admin/empresas/{id}', [App\Http\Controllers\EmpresaController::class, 'destroy'])->name('admin.empresas.destroy')->middleware('auth');
+
+//Rutas para roles
+Route::get('/admin/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('admin.roles.index')->middleware('auth');
+Route::get('/admin/roles/create', [App\Http\Controllers\RoleController::class, 'create'])->name('admin.roles.create')->middleware('auth');
+Route::post('/admin/roles/create', [App\Http\Controllers\RoleController::class, 'store'])->name('admin.roles.store')->middleware('auth');
+Route::get('/admin/roles/{id}', [App\Http\Controllers\RoleController::class, 'show'])->name('admin.roles.show')->middleware('auth');
+Route::get('/admin/roles/{id}/edit', [App\Http\Controllers\RoleController::class, 'edit'])->name('admin.roles.edit')->middleware('auth');
+Route::put('/admin/roles/{id}', [App\Http\Controllers\RoleController::class, 'update'])->name('admin.roles.update')->middleware('auth');
+Route::delete('/admin/roles/{id}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('admin.roles.destroy')->middleware('auth');
