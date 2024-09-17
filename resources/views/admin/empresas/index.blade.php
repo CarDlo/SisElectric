@@ -45,18 +45,18 @@
                                 <td>{{ $empresa->created_at }}</td>
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ url('/admin/empresas', $empresa->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ url('/admin/empresas/'.$empresa->id.'/edit') }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                        
+                                        <button type="button" data-toggle="modal" data-target="#editModal-{{ $empresa->id }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></button>
                                         <form action="{{ url('/admin/empresas/'.$empresa->id) }}" method="post" onclick="preguntar{{ $empresa->id }}(event)" id="miFormulario{{ $empresa->id }}">
                                             @csrf
                                             @method('DELETE')
                                             <button style="border-radius: 0px 3px 3px 0px" type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                         </form>
-                                        {{-- <script>
-                                            function preguntar{{ $usuario->id }}(event) {
+                                        <script>
+                                            function preguntar{{ $empresa->id }}(event) {
                                                 event.preventDefault();
                                                 Swal.fire({
-                                                            title: "¿Desea eliminar el rol?",
+                                                            title: "¿Desea eliminar la empresa?",
                                                             showDenyButton: false,
                                                             icon: 'question',
                                                             showCancelButton: true,
@@ -67,12 +67,12 @@
                                                             }).then((result) => {
                                                             /* Read more about isConfirmed, isDenied below */
                                                                 if (result.isConfirmed) {
-                                                                    document.getElementById("miFormulario{{ $usuario->id }}").submit();
+                                                                    document.getElementById("miFormulario{{ $empresa->id }}").submit();
                                                                     //Swal.fire("Eliminando", "", "success");
                                                                 } 
                                                             });
                                             }
-                                        </script> --}}
+                                        </script>
                                         
                                     </div>
                                 </td>
@@ -81,7 +81,25 @@
                             @endforeach
                         </tbody>
                     </table>
-                    
+                    @forEach($empresas as $empresa)
+                    <x-modal-editEmpresa>
+                    <x-slot name="empresa_id">
+                        {{ $empresa->id }}
+                    </x-slot>
+                    <x-slot name="empresa_nombre">
+                        {{ $empresa->nombre }}
+                    </x-slot>
+                    <x-slot name="empresa_tramo">
+                        {{ $empresa->tramo }}
+                    </x-slot>
+                    <x-slot name="empresa_tipo">
+                        {{ $empresa->tipo }}
+                    </x-slot>
+                    <x-slot name="empresa_nit">
+                        {{ $empresa->nit }}
+                    </x-slot>
+                    </x-modal-editEmpresa>
+                    @endforeach
                     
                     
                 </div>

@@ -41,8 +41,10 @@ class EmpresaController extends Controller
   
           $empresa->save();
 
-  
-          return redirect()->route('admin.empresas.index');
+
+          return redirect()->route('admin.empresas.index')
+          ->with('mensaje', 'Se creo la empresa correctamente')
+          ->with('icono', 'success');
    
     }
 
@@ -65,16 +67,34 @@ class EmpresaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Empresa $empresa)
+    public function update(Request $request, $id)
     {
-        //
+        
+          $request->validate([
+            'nombre' => 'required',
+            'nit' => 'required|unique:empresas,nit,'.$id,
+          ]);
+          $empresa = Empresa::find($id);
+          $empresa->nombre = $request->nombre;
+          $empresa->tramo = $request->tramo;
+          $empresa->nit = $request->nit;
+          $empresa->tipo = $request->tipo;
+
+          $empresa->save();
+  
+          return redirect()->route('admin.empresas.index')
+          ->with('mensaje', 'Se modifico la empresa correctamente')
+          ->with('icono', 'success');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Empresa $empresa)
+    public function destroy(string $id)
     {
-        //
+        Empresa::destroy($id);
+        return redirect()->route('admin.empresas.index')
+        ->with('mensaje', 'Se elimino el rol correctamente')
+        ->with('icono', 'success');
     }
 }
