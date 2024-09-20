@@ -47,7 +47,7 @@
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{ url('/admin/usuarios', $usuario->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ url('/admin/usuarios/'.$usuario->id.'/edit') }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                        <button type="button" data-toggle="modal" data-target="#editUsuario-{{ $usuario->id }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></button>
                                         <form action="{{ url('/admin/usuarios/'.$usuario->id) }}" method="post" onclick="preguntar{{ $usuario->id }}(event)" id="miFormulario{{ $usuario->id }}">
                                             @csrf
                                             @method('DELETE')
@@ -83,6 +83,25 @@
                         </tbody>
                     </table>
                     
+                    @forEach($usuarios as $usuario)
+                    <x-modal-editUsuario>
+                    <x-slot name="usuario_id">
+                        {{ $usuario->id }}
+                    </x-slot>
+                    <x-slot name="usuario_nombre">
+                        {{ $usuario->name }}
+                    </x-slot>
+                    <x-slot name="usuario_cedula">
+                        {{ $usuario->cedula }}
+                    </x-slot>
+                    <x-slot name="usuario_email">
+                        {{ $usuario->email }}
+                    </x-slot>
+                    <x-slot name="usuario_empresa">
+                        {{ $usuario->empresa_id }}
+                    </x-slot>
+                    </x-modal-editUsuario>
+                    @endforeach
                     
                     
                 </div>

@@ -307,6 +307,11 @@ return [
 
         // Sidebar items:
 
+        [
+            'text' => 'Tareas',
+            'icon' => 'fa-solid fa-task',
+            'url' => 'tareas',
+        ],
 
         [
             'text' => 'Aprobaciones',
@@ -401,102 +406,17 @@ return [
             ]
         ],
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/datatables/js/jquery.dataTables.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables/js/dataTables.bootstrap4.min.js',
+                    'location' => 'DataTables\datatables.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'vendor/datatables/css/dataTables.bootstrap4.min.css',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables/js/datatableEmpleados.js',
-                ],
-            ],
-        ],
-        'DatatablesPlugins' => [
-            'active' => false,
-            'files' => [
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => 'vendor\datatables-plugins\keytable\css\keyTable.bootstrap4.min.css',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor\datatables-plugins\keytable\js\dataTables.keyTable.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor\datatables-plugins\keytable\js\keyTable.bootstrap4.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/buttons/js/dataTables.buttons.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.bootstrap4.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/colreorder/js/dataTables.colReorder.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/colreorder/js/colReorder.bootstrap4.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.colVis.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.html5.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/buttons/js/buttons.print.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/jszip/jszip.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/pdfmake/pdfmake.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/pdfmake/vfs_fonts.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => 'vendor/datatables-plugins/buttons/css/buttons.bootstrap4.min.css',
+                    'location' => 'DataTables\datatables.min.css',
                 ],
             ],
         ],
@@ -515,6 +435,32 @@ return [
                 ],
             ],
         ],
+        'Moment.js' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/moment/moment.min.js',
+                ]
+            ],
+        ],
+        'Tempus Dominus for Bootstrap 4' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css',
+                ],
+            ],
+        ],
+
         'Chartjs' => [
             'active' => false,
             'files' => [

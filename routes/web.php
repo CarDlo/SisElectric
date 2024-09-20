@@ -46,3 +46,12 @@ Route::get('/admin/roles/{id}', [App\Http\Controllers\RoleController::class, 'sh
 Route::get('/admin/roles/{id}/edit', [App\Http\Controllers\RoleController::class, 'edit'])->name('admin.roles.edit')->middleware('auth');
 Route::put('/admin/roles/{id}', [App\Http\Controllers\RoleController::class, 'update'])->name('admin.roles.update')->middleware('auth');
 Route::delete('/admin/roles/{id}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('admin.roles.destroy')->middleware('auth');
+
+//Rutas para TAREAS
+Route::get('/tareas', [App\Http\Controllers\TareaController::class, 'index'])->name('tareas.index')->middleware('auth');
+Route::get('/tareas/create', [App\Http\Controllers\TareaController::class, 'create'])->name('tareas.create')->middleware('auth');
+Route::post('/tareas/create', [App\Http\Controllers\TareaController::class, 'store'])->name('tareas.store')->middleware('auth');
+Route::get('/tareas/{id}', [App\Http\Controllers\TareaController::class, 'show'])->name('tareas.show')->middleware('auth');
+Route::get('/tareas/{id}/edit', [App\Http\Controllers\TareaController::class, 'edit'])->name('tareas.edit')->middleware('auth');
+Route::put('/tareas/{id}', [App\Http\Controllers\TareaController::class, 'update'])->name('tareas.update')->middleware('auth');
+Route::delete('/tareas/{id}', [App\Http\Controllers\TareaController::class, 'destroy'])->name('tareas.destroy')->middleware('auth');
