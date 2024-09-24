@@ -1,34 +1,41 @@
-<div class="modal fade" id="crearTarea" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="crearSubtarea-{{ $tarea_id }}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Agregar nueva Tarea</h5>
+          <h5 class="modal-title">Agregar nuevo registro</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           
-          <form action="{{route('tareas.store')}}" method="post" enctype="multipart/form-data">
+          <form action="{{route('subtareas.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
+              <p>{{ $tarea_titulo }}</p>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="titulo">Titulo</label>
+                        <input type="hidden" name="tarea_id" value="{{ $tarea_id }}">
+                        <label for="titulo">Titulo del registro</label>
                         <input value="{{old('titulo')}}"  name="titulo" type="text" class="form-control" id="titulo" required>
                         @error('titulo')
                         <small style="">{{ $message }}</small>
                         @enderror
-                        <label for="detalle">Detalle</label>
+                        <label for="detalle">Detalle del registro</label>
                         <textarea value="{{old('detalle')}}"  name="detalle" type="text" class="form-control" id="detalle" required></textarea>
                         @error('detalle')
                         <small style="">{{ $message }}</small>
                         @enderror
-                        <label for="vencimiento">Vencimiento</label>
+                        <label for="estado">Estado</label>
+                        <select name="estado" id="estado" class="form-control">
+                          <option value="Pendiente" {{ $tarea_estado == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                          <option value="Completo" {{ $tarea_estado == 'Completo' ? 'selected' : '' }}>Completo</option>
+                       </select>
+                        <label for="new_vencimiento">Nuevo vencimiento</label>
                         <div class="form-group">
-                          <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                              <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" name="vencimiento" id="vencimiento" />
-                              <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                          <div class="input-group date" id="dateSubtarea" data-target-input="nearest">
+                              <input value="{{$tarea_vencimiento}}" type="text" class="form-control datetimepicker-input" data-target="#dateSubtarea" name="new_vencimiento" id="new_vencimiento" />
+                              <div class="input-group-append" data-target="#dateSubtarea" data-toggle="datetimepicker">
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
                           </div>
@@ -55,3 +62,4 @@
       </div>
     </div>
   </div>
+

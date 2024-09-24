@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Tarea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class TareaController extends Controller
 {
@@ -32,15 +35,15 @@ class TareaController extends Controller
         // $request->validate([
         //     'name' => 'required|unique:roles',
         //   ]);
+       // return response()->json($request);
           $tarea = new Tarea();
 
-          $tarea->titulo = $request->nombre;
+          $tarea->titulo = $request->titulo;
           $tarea->detalle = $request->detalle;
           $tarea->estado = "Pendiente";
           $tarea->vencimiento = $request->vencimiento;
-          $tarea->user_id = 1;
-         
-        return response()->json($tarea);
+          $tarea->user_id = Auth::user()->id;
+
   
           $tarea->save();
 
@@ -77,8 +80,11 @@ class TareaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tarea $tarea)
+    public function destroy(string $id)
     {
-        //
+        Tarea::destroy($id);
+        return redirect()->route('tareas.index')
+        ->with('mensaje', 'Se elimino la actividad correctamente')
+        ->with('icono', 'success');
     }
 }

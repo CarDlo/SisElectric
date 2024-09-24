@@ -55,3 +55,12 @@ Route::get('/tareas/{id}', [App\Http\Controllers\TareaController::class, 'show']
 Route::get('/tareas/{id}/edit', [App\Http\Controllers\TareaController::class, 'edit'])->name('tareas.edit')->middleware('auth');
 Route::put('/tareas/{id}', [App\Http\Controllers\TareaController::class, 'update'])->name('tareas.update')->middleware('auth');
 Route::delete('/tareas/{id}', [App\Http\Controllers\TareaController::class, 'destroy'])->name('tareas.destroy')->middleware('auth');
+
+//Rutas para SUBTAREAS
+Route::get('/subtareas', [App\Http\Controllers\SubtareaController::class, 'index'])->name('subtareas.index')->middleware('auth');
+Route::get('/subtareas/create', [App\Http\Controllers\SubtareaController::class, 'create'])->name('subtareas.create')->middleware('auth');
+Route::post('/subtareas/create', [App\Http\Controllers\SubtareaController::class, 'store'])->name('subtareas.store')->middleware('auth');
+Route::get('/subtareas/{id}', [App\Http\Controllers\SubtareaController::class, 'show'])->name('subtareas.show')->middleware('auth');
+Route::get('/subtareas/{id}/edit', [App\Http\Controllers\SubtareaController::class, 'edit'])->name('subtareas.edit')->middleware('auth');
+Route::put('/subtareas/{id}', [App\Http\Controllers\SubtareaController::class, 'update'])->name('subtareas.update')->middleware('auth');
+Route::delete('/subtareas/{id}', [App\Http\Controllers\SubtareaController::class, 'destroy'])->name('subtareas.destroy')->middleware('auth');

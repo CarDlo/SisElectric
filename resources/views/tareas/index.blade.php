@@ -41,10 +41,9 @@
                             <th scope="col">Detalle</th>
                             <th scope="col">Vencimiento</th>
                             <th scope="col">Estado</th>
-                            <th scope="col">Ultima actualizacion</th>
+                            <th scope="col">Actualizacion</th>
                             <th scope="col">Creacion</th>
-
-
+                            <th scope="col">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -54,19 +53,56 @@
                                 <td>{{ $tarea->titulo }}</td>
                                 <td>{{ $tarea->detalle }}</td>
                                 <td>{{ $tarea->vencimiento }}</td>
-                                <td>{{ $tarea->estado }}</td>
                                     @if( $tarea->estado === 'Pendiente')
                                     <td class="bg-secondary">{{ $tarea->estado }}</td>
-                                    @elseif($tarea->estado === 'Finalizado')
+                                    @elseif($tarea->estado === 'Completo')
                                     <td class="bg-success">{{ $tarea->estado }}</td>
                                     @elseif($tarea->estado === 'Retrasado')
                                     <td class="bg-danger">{{ $tarea->estado }}</td>
                                     @endif
+                                    @if($tarea->updated_at)
+                                    <td>{{ $tarea->updated_at->format('Y-m-d') }}</td>
+                                    @else
+                                    <td>0000-00-00</td>
+                                    @endif
+                                    @if($tarea->created_at)
+                                    <td>{{ $tarea->created_at->format('Y-m-d') }}</td>
+                                    @else
+                                    <td>0000-00-00</td>
+                                    @endif
+                                
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
-                                        <button type="button" data-toggle="modal" data-target="#registrarModal-{{ $tarea->id }}" data-nombre="{{ $tarea->nombre }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                        <button type="button" onclick="mostrarSubtareas({{ $tarea->id }})" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
+                                        <button type="button" data-toggle="modal" data-target="#crearSubtarea-{{ $tarea->id }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></button>
+                                        <form action="{{ url('/tareas/'.$tarea->id) }}" method="post" onclick="preguntar{{ $tarea->id }}(event)" id="miFormulario{{ $tarea->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button style="border-radius: 0px 3px 3px 0px" type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                       <script>
+                                            function preguntar{{ $tarea->id }}(event) {
+                                                event.preventDefault();
+                                                Swal.fire({
+                                                            title: "¿Desea eliminar el rol?",
+                                                            showDenyButton: false,
+                                                            icon: 'question',
+                                                            showCancelButton: true,
+                                                            confirmButtonText: "Eliminar",
+                                                            cancelButtonText: "Cancelar",
+                                                            confirmButtonColor: "#dc3545",
+                                                            
+                                                            }).then((result) => {
+                                                            /* Read more about isConfirmed, isDenied below */
+                                                                if (result.isConfirmed) {
+                                                                    document.getElementById("miFormulario{{ $tarea->id }}").submit();
+                                                                    //Swal.fire("Eliminando", "", "success");
+                                                                } 
+                                                            });
+                                            }
+                                        </script>
+
+
                                     </div>
                                 </td>
 
@@ -75,131 +111,44 @@
                         </tbody>
                         
                     </table>
+
                     
-                    {{-- @forEach($tareas as $tarea)
-                    <x-modal-editTarea>
+                    
+                    @forEach($tareas as $tarea)
+                    <x-modal-crearSubtarea>
                     <x-slot name="tarea_id">
                         {{ $tarea->id }}
                     </x-slot>
-                    <x-slot name="tarea_titulo">
+                   <x-slot name="tarea_titulo">
                         {{ $tarea->titulo }}
                     </x-slot>
-                    <x-slot name="tarea_detalle">
-                        {{ $tarea->detalle }}
-                    </x-slot>
                     <x-slot name="tarea_estado">
-                        {{ $tarea->cedula }}
+                        {{ $tarea->estado }}
                     </x-slot>
                     <x-slot name="tarea_vencimiento">
                         {{ $tarea->vencimiento }}
                     </x-slot>
-                    </x-modal-editTarea>
-                    @endforeach --}}
+                    </x-modal-crearSubtarea>
+                    @endforeach
                 </div>
 
             
             </div>
             
         </div>
-        <div class="col-md-4">
-            
 
+        <div class="col-md-4">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Historial de revision</h3>
-
-                    
+                    <h3 class="card-title">Historial de revisión</h3>
                 </div>
-              
-                <div class="timeline p-2">
-
-                    <div class="time-label">
-                    <span class="bg-red">10 Feb. 2014</span>
-                    </div>
-                    
-                    
-                    <div>
-                    <i class="fas fa-envelope bg-blue"></i>
-                    <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                    <h3 class="timeline-header"><a href="#">Sandra Guzman</a> Cargue de archivos</h3>
-                    <div class="timeline-body">
-                    Se cargo archivos del señor carlos de la ossa
-                    </div>
-                    <div class="timeline-footer">
-                    <a class="btn btn-primary btn-sm">Read more</a>
-                    <a class="btn btn-danger btn-sm">Delete</a>
-                    </div>
-                    </div>
-                    </div>
-                    
-                    
-                    <div>
-                    <i class="fas fa-user bg-green"></i>
-                    <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                    <h3 class="timeline-header no-border"><a href="#">Martha Avendaño</a> Rechazado</h3>
-                    </div>
-                    </div>
-                    
-                    
-                    <div>
-                    <i class="fas fa-comments bg-yellow"></i>
-                    <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                    <h3 class="timeline-header"><a href="#">Martha Avendaño</a> commented on your post</h3>
-                    <div class="timeline-body">
-                    Se encuentra rechazado pendiente pago seguridad social
-                    </div>
-                    <div class="timeline-footer">
-                    <a class="btn btn-warning btn-sm">View comment</a>
-                    </div>
-                    </div>
-                    </div>
-                    
-                    
-                    <div class="time-label">
-                    <span class="bg-green">3 Jan. 2014</span>
-                    </div>
-                    
-                    
-                    <div>
-                    <i class="fa fa-camera bg-purple"></i>
-                    <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-                    <h3 class="timeline-header"><a href="#">Sandra Guzman</a> Se cargaron los archivos faltantes</h3>
-                    <div class="timeline-body">
-                    <img src="https://placehold.it/150x100" alt="...">
-                    <img src="https://placehold.it/150x100" alt="...">
-
-                    </div>
-                    </div>
-                    </div>
-                    
-                    
-                    <div>
-                    <i class="fas fa-video bg-maroon"></i>
-                    <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
-                    <h3 class="timeline-header"><a href="#">Martha Avendaño</a> Aprobado</h3>
-                    <div class="timeline-body">
-                    
-                    </div>
-                    <div class="timeline-footer">
-                    <a href="#" class="btn btn-sm bg-maroon">See comments</a>
-                    </div>
-                    </div>
-                    </div>
-                    
-                    <div>
-                    <i class="fas fa-clock bg-gray"></i>
-                    </div>
-                    </div>
                 
-                </div>
-            
-
-        </div>
+                <div class="timeline p-2 subtareas-content" id="panel-subtareas" style="display: none;">
+                    
+                </div> <!-- Cierre de .timeline -->
+            </div> <!-- Cierre de .card -->
+        </div> <!-- Cierre de .col-md-4 -->
+        
 
     </div>
 
@@ -215,10 +164,14 @@
 @stop
 
 @section('js')
+
+
+
 <script>
     $(document).ready(function() {
         new DataTable('#tareas', {
-            responsive: true,
+        autoWidth: false,
+        responsive: true,
         colReorder: true,
         keys: true,
         lengthMenu: [10, 25, 50, 75, 100, 500, 1000],
@@ -277,6 +230,56 @@
             format: 'YYYY-MM-DD'
         });
     });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#dateSubtarea').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+</script>
+<script>
+    function mostrarSubtareas(tareaId) {
+        fetch(`/tareas/${tareaId}`)
+            .then(response => response.json())
+            .then(data => {
+                const subtareasDiv = document.getElementById('subtareas-content');
+                subtareasDiv.innerHTML = ''; // Limpiar contenido previo
+                data.subtareas.forEach(subtarea => {
+                    subtareasDiv.innerHTML += `
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${subtarea.titulo}</h5>
+                            <p class="card-text">${subtarea.detalle}</p>
+                        </div>
+                    </div>
+                    -----------------
+                    <div class="time-label">
+                        <span class="bg-red">10 Feb. 2014</span>
+                    </div>
+                    
+                    <div>
+                        <i class="fas fa-envelope bg-blue"></i>
+                        <div class="timeline-item">
+                            <span class="time"><i class="fas fa-clock"></i> 12:05</span>
+                            <h3 class="timeline-header"><a href="#">Sandra Guzman</a> Cargue de archivos</h3>
+                            <div class="timeline-body">
+                                Se cargaron archivos del señor Carlos de la Ossa.
+                            </div>
+                            <div class="timeline-footer">
+                                <a class="btn btn-primary btn-sm">Read more</a>
+                                <a class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                    -----------------------
+                    
+                    `;
+                });
+                document.getElementById('panel-subtareas').style.display = 'block'; // Mostrar panel
+            })
+            .catch(error => console.error('Error:', error));
+    }
 </script>
 
 @stop
