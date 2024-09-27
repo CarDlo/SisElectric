@@ -15,7 +15,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-        $tareas = Tarea::all();
+        $tareas = Tarea::with('subtareas')->get(); // Obtener todas las tareas con sus subtareas
         return view('tareas.index', compact('tareas'));
     }
 
@@ -56,9 +56,10 @@ class TareaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tarea $tarea)
+    public function show($id)
     {
-        //
+        $tarea = Tarea::with('subtareas')->findOrFail($id);
+        return response()->json($tarea); // Retorna la tarea y sus subtareas como JSON
     }
 
     /**

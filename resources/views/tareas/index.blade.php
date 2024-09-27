@@ -143,7 +143,7 @@
                     <h3 class="card-title">Historial de revisión</h3>
                 </div>
                 
-                <div class="timeline p-2 subtareas-content" id="panel-subtareas" style="display: none;">
+                <div class="timeline p-2" id="subtareas-content" style="display: none;">
                     
                 </div> <!-- Cierre de .timeline -->
             </div> <!-- Cierre de .card -->
@@ -153,6 +153,12 @@
     </div>
 
 
+
+
+    @php
+    $config = ['format' => 'YYYY-MM-DD'];
+    @endphp
+    <x-adminlte-input-date name="idDisabled" value="2020-10-04" :config="$config" />
 
 
     
@@ -179,33 +185,8 @@
             topStart: {
                 buttons: [
             'colvis',
-            {
-                extend: 'excel',
-                title: 'Empleados para aprobación',  // Título dentro del Excel
-                filename: 'EmpleadosAprobacion',  // Nombre del archivo Excel
-                },
             'copy',
-            {
-                extend: 'pdf',
-                title: 'Empleados para aprobación',  // Título dentro del PDF
-                filename: 'EmpleadosAprobacion',  // Nombre del archivo PDF
-                orientation: 'portrait',  // Orientación del PDF (puede ser 'landscape' o 'portrait')
-                pageSize: 'A4',  // Tamaño de página
-                exportOptions: {
-                    columns: ':visible'  // Exportar solo columnas visibles
-                },
-                customize: function (doc) {
-                    // Personalización del PDF (añadir estilos, colores, etc.)
-                    doc.styles.title = {
-                        fontSize: 18,  // Tamaño de fuente del título
-                        bold: true,  // Título en negrita
-                        alignment: 'center'  // Alineación del título
-                    };
-                    doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-                }
-
-                
-            },
+           
             
 
         ]
@@ -246,37 +227,41 @@
                 const subtareasDiv = document.getElementById('subtareas-content');
                 subtareasDiv.innerHTML = ''; // Limpiar contenido previo
                 data.subtareas.forEach(subtarea => {
+
+                    const fechaFormateada = new Date(subtarea.updated_at).toISOString().split('T')[0];
+                      // Variable para el contenido del footer dependiendo del estado
+                      let contenidoFooter = '';
+                    // Evaluar si la subtarea está pendiente o completa
+                    if (subtarea.estado === 'Pendiente') {
+                        contenidoFooter = `
+                            <span class="bg-secondary">${fechaFormateada}</span>
+                        `;
+                    } else if (subtarea.estado === 'Completo') {
+                        contenidoFooter = `
+                            <span class="bg-success">${fechaFormateada}</span>
+                        `;
+                    }
                     subtareasDiv.innerHTML += `
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">${subtarea.titulo}</h5>
-                            <p class="card-text">${subtarea.detalle}</p>
-                        </div>
-                    </div>
-                    -----------------
                     <div class="time-label">
-                        <span class="bg-red">10 Feb. 2014</span>
+                        ${contenidoFooter}
                     </div>
-                    
                     <div>
-                        <i class="fas fa-envelope bg-blue"></i>
-                        <div class="timeline-item">
-                            <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                            <h3 class="timeline-header"><a href="#">Sandra Guzman</a> Cargue de archivos</h3>
+                        <i class="fas fa-user bg-blue"></i>
+                        <div class="timeline-item"> 
+                            <h3 class="timeline-header"><a href="#">Sandra Guzman</a> ${subtarea.titulo}</h3>
                             <div class="timeline-body">
-                                Se cargaron archivos del señor Carlos de la Ossa.
+                                ${subtarea.detalle}
                             </div>
                             <div class="timeline-footer">
-                                <a class="btn btn-primary btn-sm">Read more</a>
-                                <a class="btn btn-danger btn-sm">Delete</a>
+                                    Fecha de vencimiento: ${subtarea.vencimiento}
+                            </div>
+                           
                             </div>
                         </div>
                     </div>
-                    -----------------------
-                    
                     `;
                 });
-                document.getElementById('panel-subtareas').style.display = 'block'; // Mostrar panel
+                document.getElementById('subtareas-content').style.display = 'block'; // Mostrar panel
             })
             .catch(error => console.error('Error:', error));
     }
