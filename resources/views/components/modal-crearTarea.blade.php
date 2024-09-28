@@ -25,14 +25,11 @@
                         <small style="">{{ $message }}</small>
                         @enderror
                         <label for="vencimiento">Vencimiento</label>
-                        <div class="form-group">
-                          <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                              <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" name="vencimiento" id="vencimiento" />
-                              <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                              </div>
-                          </div>
-                      </div>
+                        @php
+                        $config = ['format' => 'YYYY-MM-DD'];
+                        @endphp
+                        <x-adminlte-input-date name="vencimiento" value="{{old('vencimiento')}}" :config="$config"/>
+
                     </div>{{-- cierre formgroup --}}
                 </div>{{-- cierre col-12 --}}
             </div>{{-- cierre row --}}

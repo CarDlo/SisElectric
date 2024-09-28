@@ -41,8 +41,6 @@
                             <th scope="col">Detalle</th>
                             <th scope="col">Vencimiento</th>
                             <th scope="col">Estado</th>
-                            <th scope="col">Actualizacion</th>
-                            <th scope="col">Creacion</th>
                             <th scope="col">Acciones</th>
                         </tr>
                         </thead>
@@ -60,25 +58,15 @@
                                     @elseif($tarea->estado === 'Retrasado')
                                     <td class="bg-danger">{{ $tarea->estado }}</td>
                                     @endif
-                                    @if($tarea->updated_at)
-                                    <td>{{ $tarea->updated_at->format('Y-m-d') }}</td>
-                                    @else
-                                    <td>0000-00-00</td>
-                                    @endif
-                                    @if($tarea->created_at)
-                                    <td>{{ $tarea->created_at->format('Y-m-d') }}</td>
-                                    @else
-                                    <td>0000-00-00</td>
-                                    @endif
                                 
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" onclick="mostrarSubtareas({{ $tarea->id }})" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
-                                        <button type="button" data-toggle="modal" data-target="#crearSubtarea-{{ $tarea->id }}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></button>
+                                        <button type="button" onclick="mostrarSubtareas({{ $tarea->id }})" class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></button>
+                                        <button type="button" data-toggle="modal" data-target="#crearSubtarea-{{ $tarea->id }}" class="btn btn-outline-success btn-sm"><i class="fas fa-edit"></i></button>
                                         <form action="{{ url('/tareas/'.$tarea->id) }}" method="post" onclick="preguntar{{ $tarea->id }}(event)" id="miFormulario{{ $tarea->id }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button style="border-radius: 0px 3px 3px 0px" type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                            <button style="border-radius: 0px 3px 3px 0px" type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
                                         </form>
                                        <script>
                                             function preguntar{{ $tarea->id }}(event) {
@@ -155,10 +143,7 @@
 
 
 
-    @php
-    $config = ['format' => 'YYYY-MM-DD'];
-    @endphp
-    <x-adminlte-input-date name="idDisabled" value="2020-10-04" :config="$config" />
+
 
 
     
@@ -176,8 +161,8 @@
 <script>
     $(document).ready(function() {
         new DataTable('#tareas', {
-        autoWidth: false,
         responsive: true,
+        autowidth: true,
         colReorder: true,
         keys: true,
         lengthMenu: [10, 25, 50, 75, 100, 500, 1000],
@@ -205,21 +190,15 @@
     }); 
     });</script>
 
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker4').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
-    });
-</script>
-<script type="text/javascript">
-    $(function () {
-        $('#dateSubtarea').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
-    });
-</script>
+
 <script>
+        const usuarios = @json($usuarios);
+    
+    // Función para buscar el nombre del usuario por su ID
+    function obtenerNombreUsuario(userId) {
+        const usuario = usuarios.find(user => user.id === userId);
+        return usuario ? usuario.name : 'Usuario no encontrado';
+    }
     function mostrarSubtareas(tareaId) {
         fetch(`/tareas/${tareaId}`)
             .then(response => response.json())
@@ -248,7 +227,7 @@
                     <div>
                         <i class="fas fa-user bg-blue"></i>
                         <div class="timeline-item"> 
-                            <h3 class="timeline-header"><a href="#">Sandra Guzman</a> ${subtarea.titulo}</h3>
+                            <h3 class="timeline-header"><a href="#">${obtenerNombreUsuario(subtarea.user_id)}</a> ${subtarea.titulo}</h3>
                             <div class="timeline-body">
                                 ${subtarea.detalle}
                             </div>

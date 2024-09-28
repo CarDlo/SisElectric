@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarea;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,9 @@ class TareaController extends Controller
     public function index()
     {
         $tareas = Tarea::with('subtareas')->get(); // Obtener todas las tareas con sus subtareas
-        return view('tareas.index', compact('tareas'));
+        $usuarios = User::all();
+        //$tareas = Tarea::with(['subtareas.user'])->get(); // Obtener todas las tareas con sus subtareas
+        return view('tareas.index', compact('tareas', 'usuarios'));
     }
 
     /**

@@ -32,14 +32,10 @@
                           <option value="Completo" {{ $tarea_estado == 'Completo' ? 'selected' : '' }}>Completo</option>
                        </select>
                         <label for="new_vencimiento">Nuevo vencimiento</label>
-                        <div class="form-group">
-                          <div class="input-group date" id="dateSubtarea" data-target-input="nearest">
-                              <input value="{{$tarea_vencimiento}}" type="text" class="form-control datetimepicker-input" data-target="#dateSubtarea" name="new_vencimiento" id="new_vencimiento" />
-                              <div class="input-group-append" data-target="#dateSubtarea" data-toggle="datetimepicker">
-                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                              </div>
-                          </div>
-                      </div>
+                        @php
+                        $config = ['format' => 'YYYY-MM-DD'];
+                        @endphp
+                        <x-adminlte-input-date id="new_vencimiento-{{ $tarea_id }}" name="new_vencimiento" value="{{old('new_vencimiento')}}" :config="$config"/>
                     </div>{{-- cierre formgroup --}}
                 </div>{{-- cierre col-12 --}}
             </div>{{-- cierre row --}}

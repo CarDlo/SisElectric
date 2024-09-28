@@ -53,4 +53,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Empleado::class);
     }
+    public function tareas()
+    {
+        return $this->hasMany(Tarea::class);
+    }
+    public function subtareas()
+    {
+        return $this->hasMany(Subtarea::class);
+    }
 }

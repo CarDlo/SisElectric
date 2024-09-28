@@ -309,7 +309,7 @@ return [
 
         [
             'text' => 'Tareas',
-            'icon' => 'fa-solid fa-task',
+            'icon' => 'fa-solid fa-list-check',
             'url' => 'tareas',
         ],
 
@@ -400,9 +400,14 @@ return [
             'files' => [
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
-                ]
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//kit.fontawesome.com/ebce9e5abd.js',
+                ],
             ]
         ],
         'Datatables' => [
@@ -411,12 +416,12 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'DataTables\datatables.min.js',
+                    'location' => 'DataTables/datatables.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => 'DataTables\datatables.min.css',
+                    'location' => 'DataTables/datatables.min.css',
                 ],
             ],
         ],

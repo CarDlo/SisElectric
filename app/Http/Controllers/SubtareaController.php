@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tarea;
 use App\Models\Subtarea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubtareaController extends Controller
 {
@@ -36,7 +37,7 @@ class SubtareaController extends Controller
         $subtarea->estado = $request->estado;
         $subtarea->vencimiento = $request->new_vencimiento;
         $subtarea->tarea_id = $request->tarea_id;
-        
+        $subtarea->user_id = Auth::user()->id;
 
 
         $subtarea->save();
