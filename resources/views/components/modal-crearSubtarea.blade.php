@@ -35,7 +35,7 @@
                         @php
                         $config = ['format' => 'YYYY-MM-DD'];
                         @endphp
-                        <x-adminlte-input-date id="new_vencimiento-{{ $tarea_id }}" name="new_vencimiento" value="{{old('new_vencimiento')}}" :config="$config"/>
+                        <x-adminlte-input-date id="new_vencimiento-{{ $tarea_id }}" name="new_vencimiento" value="{{$tarea_vencimiento}}" :config="$config"/>
                     </div>{{-- cierre formgroup --}}
                 </div>{{-- cierre col-12 --}}
             </div>{{-- cierre row --}}
