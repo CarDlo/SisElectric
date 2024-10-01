@@ -20,12 +20,12 @@
 
     <div class="row">
         <div class="col-md-8">
-            <div class="card card-outline card-primary">
+            <div class="card card-outline card-dark">
                 <div class="card-header">
                 <h3 class="card-title">Tareas</h3>
                     <div class="card-tools">
                     {{-- <a class="btn btn-primary btn-sm" href="{{ route('aprobaciones.empleados.create') }}">Crear nuevo</a> --}}
-                    <a class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#crearTarea">Crear nueva tarea</a>
+                    <a class="btn btn-dark btn-sm" href="#" data-toggle="modal" data-target="#crearTarea">Crear nueva tarea</a>
                     </div>
 
                     <x-modal-crearTarea/>
@@ -61,12 +61,12 @@
                                 
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" onclick="mostrarSubtareas({{ $tarea->id }})" class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></button>
-                                        <button type="button" data-toggle="modal" data-target="#crearSubtarea-{{ $tarea->id }}" class="btn btn-outline-success btn-sm"><i class="fas fa-edit"></i></button>
+                                        <button type="button" onclick="mostrarSubtareas({{ $tarea->id }})" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></button>
+                                        <button type="button" data-toggle="modal" data-target="#crearSubtarea-{{ $tarea->id }}" class="btn btn-dark btn-sm"><i class="fas fa-edit"></i></button>
                                         <form action="{{ url('/tareas/'.$tarea->id) }}" method="post" onclick="preguntar{{ $tarea->id }}(event)" id="miFormulario{{ $tarea->id }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button style="border-radius: 0px 3px 3px 0px" type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                            <button style="border-radius: 0px 3px 3px 0px" type="submit" class="btn btn-dark btn-sm"><i class="fas fa-trash"></i></button>
                                         </form>
                                        <script>
                                             function preguntar{{ $tarea->id }}(event) {

@@ -21,21 +21,43 @@
                         @error('titulo')
                         <small style="">{{ $message }}</small>
                         @enderror
-                        <label for="detalle">Detalle del registro</label>
-                        <textarea value="{{old('detalle')}}"  name="detalle" type="text" class="form-control" id="detalle" required></textarea>
+                        <x-adminlte-textarea name="detalle" label="Detalle" rows=5 label-class="text-dark"
+                            igroup-size="sm" placeholder="Inserte detalle...">
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text bg-dark">
+                                    <i class="fas fa-lg fa-file-alt text-white"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-textarea>
                         @error('detalle')
                         <small style="">{{ $message }}</small>
                         @enderror
                         <label for="estado">Estado</label>
-                        <select name="estado" id="estado" class="form-control">
-                          <option value="Pendiente" {{ $tarea_estado == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
-                          <option value="Completo" {{ $tarea_estado == 'Completo' ? 'selected' : '' }}>Completo</option>
-                       </select>
+
+                        <x-adminlte-select2 name="estado" igroup-size="sm" label-class="text-lightblue"
+                            data-placeholder="Select an option...">
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text bg-dark">
+                                    <i class="fas fa-car-side"></i>
+                                </div>
+                            </x-slot>
+                            <option value="Pendiente" {{ $tarea_estado == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                            <option value="Completo" {{ $tarea_estado == 'Completo' ? 'selected' : '' }}>Completo</option>
+                        </x-adminlte-select2>
+
                         <label for="new_vencimiento">Nuevo vencimiento</label>
                         @php
                         $config = ['format' => 'YYYY-MM-DD'];
                         @endphp
-                        <x-adminlte-input-date id="new_vencimiento-{{ $tarea_id }}" name="new_vencimiento" value="{{$tarea_vencimiento}}" :config="$config"/>
+                        <x-adminlte-input-date id="new_vencimiento-{{ $tarea_id }}" name="new_vencimiento" value="{{$tarea_vencimiento}}" :config="$config" placeholder="Seleccione una fecha...">
+                            <x-slot name="appendSlot">
+                                <div class="input-group-text bg-dark">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input-date>
+
+
                     </div>{{-- cierre formgroup --}}
                 </div>{{-- cierre col-12 --}}
             </div>{{-- cierre row --}}
@@ -44,8 +66,8 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                          <button type="submit" class="btn btn-primary">Crear</button>
+                          <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cerrar</button>
+                          <button type="submit" class="btn btn-dark">Crear</button>
 
                     </div>{{-- cierre formgroup --}}
                 </div>{{-- cierre col-12 --}}
