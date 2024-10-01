@@ -2,10 +2,6 @@
 
 
 @section('content_header')
-<link href="../DataTables/datatables.min.css" rel="stylesheet">
- 
-<script src="../DataTables/datatables.min.js"></script>
-
     <h1>Empleados para aprobacion</h1>
 @stop
 
