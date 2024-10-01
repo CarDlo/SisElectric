@@ -9,7 +9,7 @@
         </div>
         <div class="modal-body">
           
-          <form action="{{route('aprobaciones.empleados.store')}}" method="post" enctype="multipart/form-data">
+          <form action="{{route('aprobaciones.empleado.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-12">

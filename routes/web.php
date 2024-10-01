@@ -12,8 +12,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Rutas empleados
-Route::get('/aprobaciones/empleados', [App\Http\Controllers\EmpleadoController::class, 'index'])->name('aprobaciones.empleados.index')->middleware('auth');
-Route::post('/aprobaciones/empleados', [App\Http\Controllers\EmpleadoController::class, 'store'])->name('aprobaciones.empleados.store')->middleware('auth');
+Route::get('/aprobaciones/empleado', [App\Http\Controllers\EmpleadoController::class, 'index'])->name('aprobaciones.empleado.index')->middleware('auth');
+Route::post('/aprobaciones/empleado', [App\Http\Controllers\EmpleadoController::class, 'store'])->name('aprobaciones.empleado.store')->middleware('auth');
 
 
 //Rutas Log de empleados
