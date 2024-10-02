@@ -25,7 +25,8 @@
                 <h3 class="card-title">Tareas</h3>
                     <div class="card-tools">
                     {{-- <a class="btn btn-primary btn-sm" href="{{ route('aprobaciones.empleados.create') }}">Crear nuevo</a> --}}
-                    <a class="btn btn-dark btn-sm" href="#" data-toggle="modal" data-target="#crearTarea">Crear nueva tarea</a>
+                    <a class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#crearTarea">Crear nueva tarea</a>
+                    
                     </div>
 
                     <x-modal-crearTarea/>
@@ -55,24 +56,22 @@
                                     <td class="bg-secondary">{{ $tarea->estado }}</td>
                                     @elseif($tarea->estado === 'Completo')
                                     <td class="bg-success">{{ $tarea->estado }}</td>
-                                    @elseif($tarea->estado === 'Retrasado')
-                                    <td class="bg-danger">{{ $tarea->estado }}</td>
                                     @endif
                                 
                                 <td style="text-align: center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" onclick="mostrarSubtareas({{ $tarea->id }})" class="btn btn-dark btn-sm"><i class="fas fa-eye"></i></button>
-                                        <button type="button" data-toggle="modal" data-target="#crearSubtarea-{{ $tarea->id }}" class="btn btn-dark btn-sm"><i class="fas fa-edit"></i></button>
+                                        <button type="button" onclick="mostrarSubtareas({{ $tarea->id }})" class="btn btn-light btn-sm"><i class="fas fa-eye"></i></button>
+                                        <button type="button" data-toggle="modal" data-target="#crearSubtarea-{{ $tarea->id }}" class="btn btn-light btn-sm"><i class="fas fa-edit"></i></button>
                                         <form action="{{ url('/tareas/'.$tarea->id) }}" method="post" onclick="preguntar{{ $tarea->id }}(event)" id="miFormulario{{ $tarea->id }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button style="border-radius: 0px 3px 3px 0px" type="submit" class="btn btn-dark btn-sm"><i class="fas fa-trash"></i></button>
+                                            <button style="border-radius: 0px 3px 3px 0px" type="submit" class="btn btn-light btn-sm"><i class="fas fa-trash"></i></button>
                                         </form>
                                        <script>
                                             function preguntar{{ $tarea->id }}(event) {
                                                 event.preventDefault();
                                                 Swal.fire({
-                                                            title: "¿Desea eliminar el rol?",
+                                                            title: "¿Desea eliminar el tarea?",
                                                             showDenyButton: false,
                                                             icon: 'question',
                                                             showCancelButton: true,
