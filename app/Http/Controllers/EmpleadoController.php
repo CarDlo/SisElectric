@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empleado;
+use App\Models\Empresa;
 use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
@@ -12,9 +13,10 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
+        $empresas = Empresa::all();
         $empleados = Empleado::all();
 
-        return view('aprobaciones.empleados.index' ,compact('empleados'));
+        return view('aprobaciones.empleados.index' ,compact('empleados', 'empresas'));
     }
 
     /**

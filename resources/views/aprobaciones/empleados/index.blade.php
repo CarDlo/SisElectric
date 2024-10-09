@@ -19,8 +19,11 @@
                     {{-- <a class="btn btn-primary btn-sm" href="{{ route('aprobaciones.empleados.create') }}">Crear nuevo</a> --}}
                     <a class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#crearModal">Crear nuevo</a>
                     </div>
-
-                    <x-modal-crear/>
+                    <x-modal-crear>
+                        <x-slot name="empresas">
+                            {{ $empresas->all() }}
+                        </x-slot>
+                    </x-modal-crear>
                     
                 </div>
                 

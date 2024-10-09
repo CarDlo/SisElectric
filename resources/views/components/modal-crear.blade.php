@@ -14,26 +14,53 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="cedula">Cedula</label>
-                        <input value="{{old('cedula')}}"  name="cedula" type="text" class="form-control" id="cedula" required>
+                      <x-adminlte-input value="{{old('cedula')}}" name="cedula" igroup-size="sm" label="Cedula" label-class="text-black" required>
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text">
+                                <i class="fas fa-address-card text-black"></i>
+                            </div>
+                        </x-slot>
+                      </x-adminlte-input>
                         @error('cedula')
                         <small style="">{{ $message }}</small>
                         @enderror
-                        <label for="nombre">Nombre</label>
-                        <input value="{{old('nombre')}}"  name="nombre" type="text" class="form-control" id="nombre" required>
+                        <x-adminlte-input value="{{old('nombre')}}" name="nombre" igroup-size="sm" label="Nombres" label-class="text-black" required>
+                          <x-slot name="prependSlot">
+                              <div class="input-group-text">
+                                  <i class="fas fa-user text-black"></i>
+                              </div>
+                          </x-slot>
+                        </x-adminlte-input>
                         @error('nombre')
                         <small style="">{{ $message }}</small>
                         @enderror
-                        <label for="apellidos">Apellidos</label>
-                        <input value="{{old('apellidos')}}"  name="apellidos" type="text" class="form-control" id="apellidos" required>
+                        <x-adminlte-input value="{{old('apellido')}}" name="apellido" igroup-size="sm" label="Apellidos" label-class="text-black" required>
+                          <x-slot name="prependSlot">
+                              <div class="input-group-text">
+                                  <i class="fas fa-user text-black"></i>
+                              </div>
+                          </x-slot>
+                        </x-adminlte-input>
                         @error('apellido')
                         <small style="">{{ $message }}</small>
                         @enderror
                         <label for="cargo">Cargo</label>
-                        <input value="{{old('cargo')}}"  name="cargo" type="text" class="form-control" id="cargo" required>
+                        <input value="{{old('cargo')}}"  name="cargo" type="text" class="form-control form-control-sm" id="cargo" required>
                         @error('cargo')
                         <small style="">{{ $message }}</small>
                         @enderror
+                        <label for="empresa_id">Empresa</label>
+                        <x-adminlte-select2 name="empresa_id" class="form-control" igroup-size="sm" label-class="text-lightblue"
+                        data-placeholder="Seleccione opcion...">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text bg-gradient-black">
+                                <i class="fas fa-building-user"></i>
+                            </div>
+                        </x-slot>
+                        @foreach ($empresas as $empresa)
+                        <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
+                        @endforeach
+                        </x-adminlte-select2>
                     </div>{{-- cierre formgroup --}}
                 </div>{{-- cierre col-12 --}}
             </div>{{-- cierre row --}}
